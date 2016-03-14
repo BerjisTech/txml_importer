@@ -113,6 +113,7 @@ module TxmlImporter
     def write_seg(reader, role)
       return if reader.read_string.nil?
       text = PrettyStrings::Cleaner.new(reader.read_string).pretty.gsub("\\","&#92;").gsub("'",%q(\\\'))
+      return if text.nil? || text.empty?
       word_count = text.gsub("\s+", ' ').split(' ').length
       if role.eql?('source')
         language = @doc[:source_language]
